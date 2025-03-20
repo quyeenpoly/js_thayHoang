@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Bài 12</h1>
+    <script>
+      console.log("Bài 12");
+      function soChinhPhuong(n) {
+        for (let i = 2; i * i <= n; i++) {
+          console.log(i * i);
+        }
+      }
+      let n12 = parseInt(prompt("Nhập số n (Bài 12):"));
+      console.log("Các số chính phương nhỏ hơn hoặc bằng", n12, "là:");
+      soChinhPhuong(n12);
+    </script>
+  </body>
+</html>

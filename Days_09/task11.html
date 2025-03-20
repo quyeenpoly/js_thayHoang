@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Bài 11</h1>
+    <script>
+      console.log("Bài 11");
+      function tamGiac(a, b, c) {
+        return a + b > c && a + c > b && b + c > a;
+      }
+      let a11 = parseInt(prompt("Nhập cạnh a (Bài 11):"));
+      let b11 = parseInt(prompt("Nhập cạnh b (Bài 11):"));
+      let c11 = parseInt(prompt("Nhập cạnh c (Bài 11):"));
+      console.log("Có tạo thành tam giác không?", tamGiac(a11, b11, c11));
+    </script>
+  </body>
+</html>

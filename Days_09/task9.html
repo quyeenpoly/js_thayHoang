@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 9</title>
+  </head>
+  <body>
+    <h1>Bài 9</h1>
+    <script>
+      console.log("Bài 9");
+      const doiCho = (a, b) => {
+        a = a + b;
+        b = a - b;
+        a = a - b;
+        return [a, b];
+      };
+      let a9 = parseInt(prompt("Nhập số a (Bài 9):"));
+      let b9 = parseInt(prompt("Nhập số b (Bài 9):"));
+      console.log("Kết quả sau khi đổi chỗ:", doiCho(a9, b9));
+    </script>
+  </body>
+</html>
