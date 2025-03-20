@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Layout</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 5px;
+        width: 400px;
+        height: 400px;
+        background: aqua;
+        border: 2px solid black;
+      }
+      .bai3 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 5px;
+        width: 400px;
+        height: 400px;
+        background: aqua;
+        border: 2px solid black;
+      }
+      .item {
+        border: 1px dashed red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .item-1 {
+        grid-column: 1 / 4;
+        grid-row: 1 / 4;
+      }
+      .item-2 {
+        grid-column: 4;
+        grid-row: 1;
+      }
+      .item-3 {
+        grid-column: 4;
+        grid-row: 2;
+      }
+      .item-4 {
+        grid-column: 4;
+        grid-row: 3;
+      }
+      .item-5 {
+        grid-column: 1;
+        grid-row: 4;
+      }
+      .item-6 {
+        grid-column: 2;
+        grid-row: 4;
+      }
+      .item-7 {
+        grid-column: 3;
+        grid-row: 4;
+      }
+      .item-8 {
+        grid-column: 4;
+        grid-row: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item item-1">Item 1</div>
+      <div class="item item-2">Item 2</div>
+      <div class="item item-3">Item 3</div>
+      <div class="item item-4">Item 4</div>
+      <div class="item item-5">Item 5</div>
+      <div class="item item-6">Item 6</div>
+      <div class="item item-7">Item 7</div>
+      <div class="item item-8">Item 8</div>
+    </div>
+    <div class="bai3">
+      <div class="b b1">B1</div>
+      <div class="b b2">B2</div>
+      <div class="b b3">B3</div>
+      <div class="b b4">B4</div>
+      <div class="b b5">B5</div>
+      <div class="b b6">B6</div>
+      <div class="b b7">B7</div>
+      <div class="b b8">B8</div>
+    </div>
+  </body>
+</html>

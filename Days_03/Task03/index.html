@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex box</title>
+    <style>
+      .container {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .product-card {
+        display: flex;
+        padding: 82px;
+        gap: 32px;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0px 24px 28px 9px rgba(179, 193, 217, 0.33);
+        width: 887px;
+        display: flex-start;
+        margin: 50px auto;
+      }
+      .product-img img {
+        width: 249px;
+      }
+      .product-content {
+        width: 442px;
+      }
+      .freeship {
+        margin-bottom: 32px;
+      }
+      .freeship button {
+        border: none;
+        border-radius: 20px;
+        background-color: #191847;
+        color: #fff;
+        font-family: Poppins;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 4px 8px;
+      }
+      .freeship h1 {
+        color: var(--191847, #191847);
+        font-family: Poppins;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      .price {
+        margin-bottom: 32px;
+      }
+      .price .prev {
+        color: var(--191847, #191847);
+        font-family: Roboto;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-decoration: line-through;
+        margin: 0;
+      }
+      .price .new {
+        color: var(--191847, #191847);
+        font-family: Poppins;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin: 0;
+      }
+      .price span {
+        color: var(--191847, #191847);
+        font-family: Poppins;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        opacity: 0.6;
+      }
+      .add {
+        margin-bottom: 32px;
+      }
+      .add button {
+        width: 410px;
+        padding: 16px;
+        border-radius: 8px;
+        background: #4788e9;
+
+        box-shadow: 0px 7px 0px 0px #1c57ee;
+        border: none;
+      }
+      .add a {
+        color: #fff;
+
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-decoration: none;
+      }
+      .span {
+        margin-bottom: 32px;
+        color: #000;
+        font-family: Poppins;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+      .flex {
+        display: flex;
+      }
+      .flex button {
+        width: 180px;
+        padding: 16px;
+        border-radius: 8px;
+        border: 2px solid #c9c9da;
+      }
+      .add1 {
+        margin-right: 16px;
+      }
+      .add2 a {
+        text-decoration: none;
+        color: var(--191847, #191847);
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+      .add1 a {
+        text-decoration: none;
+        color: var(--191847, #191847);
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="product-card">
+        <div class="product-img">
+          <img src="imgs/image 1.png" alt="" />
+        </div>
+        <div class="product-content">
+          <div class="freeship">
+            <button>Free shipping</button>
+            <h1>Razer Kraken Kitty Edt Gaming Headset Quartz</h1>
+          </div>
+          <div class="price">
+            <p class="prev">1,559,000</p>
+            <p class="new">799,000</p>
+            <span
+              >The offer is valid until April 3 or as long as stock lasts!</span
+            >
+          </div>
+          <div class="add">
+            <button><a href="">Add to card</a></button>
+          </div>
+          <div class="span"><span>50+ pcs. in stock.</span></div>
+          <div class="flex">
+            <button class="add1"><a href="">Add to cart</a></button>
+            <button class="add2"><a href="">Add to wishlist</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: yellowgreen;
+        position: relative;
+      }
+      i {
+        position: absolute;
+        animation: beat ease-in-out 3s infinite alternate;
+      }
+      @keyframes beat {
+        0% {
+          left: 0%;
+        }
+        24% {
+          left: 90%;
+        }
+        25% {
+          transform: rotate(90deg);
+        }
+        49% {
+          bottom: 0%;
+        }
+        50% {
+          transform: rotate(90deg);
+        }
+        74% {
+          bottom: 0;
+        }
+        75% {
+          transform: rotate(180deg);
+        }
+        99% {
+          left: 0;
+        }
+        100% {
+          left: 0;
+          transform: rotate(90deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- infinite -->
+    <div class="box">
+      <i class="bx bx-right-arrow-alt"></i>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  background-color: #f8f9ff;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.sub-menu {
+  display: none;
+  background-color: #ffffff;
+  border-radius: 8px;
+  position: absolute;
+
+  padding: 30px;
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.nav ul li {
+  border-radius: 8px;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: hsl(240, 55%, 13%);
+  padding: 20px 25px;
+  border-radius: 15px;
+
+  border: 1px solid transparent;
+}
+.nav ul li a:hover {
+  border-radius: 15px;
+  border: 1px solid #dde1f9;
+  background: #eff1ff;
+}
+.nav li:hover .sub-menu {
+  display: block;
+}
+
+.auth a {
+  text-decoration: none;
+  color: black;
+  padding: 20px;
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.auth a:hover {
+  border-radius: 5px;
+  background: #0f0f34;
+  color: #f9f9f9;
+}
+
+.auth li {
+  margin: 35px 50px 35px 0px;
+  list-style: none;
+}
+
+.sub-menu a {
+  display: inline-block;
+  padding: 12px;
+}
+.sub-menu a:hover {
+  background-color: #0f0f34;
+}
+
+.menu_box ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.menu_box {
+  left: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+p {
+  font-weight: 1000;
+  padding: 0 25px;
+}
