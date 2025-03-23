@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      Kiểm tra số cùng dấu Cho trước 2 số a, b. Kiểm tra 2 số cùng dấu hay không
+      và hiển thị kết quả ra màn hình.
+    </p>
+    <script>
+      function testCungDau(a, b) {
+        if (a * b > 0) {
+          document.writeln("a cùng dấu với b");
+        } else {
+          document.writeln("a khác dấu với b");
+        }
+      }
+      let a = parseInt(prompt("Nhập a: "));
+      let b = parseInt(prompt("Nhập b: "));
+
+      testCungDau(a, b);
+    </script>
+  </body>
+</html>

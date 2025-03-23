@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>Task 17: Tính tiền thuế</h1>
+    <p>
+      Tính thuế thu nhập cá nhân Viết hàm tính thuế thu nhập cá nhân với số tiền
+      lương nhập từ bàn phím (gợi ý: sử dụng window.prompt). Thuế suất như sau:
+      Khoản thu nhập <= 11 triệu: Không tính thuế. Khoản thu nhập từ trên 11
+      triệu đến 25 triệu: 5% thuế. Khoản thu nhập từ trên 25 triệu đến 50 triệu:
+      10% thuế. Khoản thu nhập từ trên 50 triệu đến 80 triệu: 20% thuế. Khoản
+      thu nhập từ trên 80 triệu: 30% thuế. Nếu thu nhập nhập vào không hợp lệ
+      thì thông báo "Thu nhập không hợp lệ".
+    </p>
+    <script>
+      let Luong = parseFloat(prompt("Nhập số tiền lương của bạn!"));
+      function taxLuong(Luong) {
+        if (isNaN(Luong) || Luong <= 0) {
+          document.write("Số tiền bạn nhập không hợp lệ");
+          return;
+        }
+        if (Luong <= 11000000) {
+          document.write(`Số tiền ${Luong}đ không cần tình thuế`);
+          return;
+        } else if (Luong <= 25000000) {
+          document.write(`Tiền thuế của ${Luong}đ là ${Luong * (5 / 100)}đ`);
+        } else if (Luong <= 50000000) {
+          document.write(`Tiền thuế của ${Luong}đ là ${Luong * (10 / 100)}đ`);
+        } else if (Luong <= 80000000) {
+          document.write(`Tiền thuế của ${Luong}đ là ${Luong * (30 / 100)}đ`);
+        }
+      }
+      taxLuong(Luong);
+    </script>
+  </body>
+</html>

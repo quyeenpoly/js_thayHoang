@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      Viết hàm in ra các số nguyên tố từ 2 đến n: Thực hiện viết hàm
+      printPrimeNumber(n) để in ra các số nguyên tố từ 2 đến n.
+    </p>
+    <script>
+      function printPrimeNumber(n) {
+        if (n < 2) {
+          return false;
+        }
+        let output = "";
+        for (let num = 2; num <= n; num++) {
+          let isPrime = true;
+          for (let i = 2; i * i <= num; i++) {
+            if (num % i === 0) {
+              isPrime = false;
+              break;
+            }
+          }
+          if (isPrime) {
+            if (output !== "") output += ", ";
+            output += num;
+          }
+        }
+        document.write("Các số nguyên tố từ 2 đến " + n + " là: " + output);
+      }
+      let a = parseInt(prompt("Nhập một số:"));
+      printPrimeNumber(a);
+    </script>
+  </body>
+</html>
