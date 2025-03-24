@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test 2</title>
+  </head>
+  <body>
+    <script>
+      // Tạo mảng đảo ngược của arr ( không dùng reverse, không tạo mảng mơi )
+      const arr = [1, 2, , , 3, 4];
+      const mangDaoNguoc = [];
+      for (let i = 0; i < arr.length; i++) {
+        mangDaoNguoc.unshift(arr[i]);
+      }
+      console.log(mangDaoNguoc);
+
+      //--------------------------------------------
+      const arrReversed = [];
+      for (let i = 0; i < arr.length / 2; i++) {
+        //cách 1:
+        let b = arr[i];
+        arr[i] = arr[arr.length - 1 - i];
+        arr[arr.length - 1 - i] = b;
+        //cách 2:
+        arrReversed[i] = arr[arr.length - 1 - i];
+        arrReversed[arr.length - 1 - i] = arr[i];
+      }
+      console.log(arrReversed);
+      console.log(arr);
+      console.log("----------------concat----------------------------");
+      /*
+       * concat, join, toString
+       */
+      const err1 = [1, 2, 3];
+      const err2 = [4, 5, 6];
+      const err = err1.concat(err2);
+      console.log(err);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>push,pop,shift,unshift,includes,indexOf</title>
+  </head>
+  <body>
+    <script>
+      /**
+            * Phương thức của mảng
+             * push():
+                      - Thêm 1 hoặc nhiều phần tử vào cuối mảng
+                      - Thay đổi mảng gốc
+                      - Trả về độ dài mới của mảng
+             * pop():
+                      - Xóa 1 phần tử ở cuối mảng
+                      - ko nhận tham số
+                      - Thay đổi mảng gốc
+                      - trả về phần tử bị xóa
+             * shift():
+                      - Bớt 1 phần tử ở đầu mảng
+                      - Thay đổi mảng gốc
+                      - Trả về phần tử bị xóa
+             * unshift():
+                      - Thêm một hoặc nhiều phần tử ở đầu mảng
+                      - Thay đổi mảng gốc
+                      - Trả về độ dài mới của mảng
+
+             * Thao tác tìm kiếm: includes, indexOf, find, filter
+             * Thao tác thay đổi: reverse, flat
+             * Thao tác duyệt: forEach, map, 
+             * slice, splice
+             */
+      const arr1 = ["Quyen", "VirusS", "Jack"];
+      arr1.push("Quyen123", "hehe");
+      console.log(arr1);
+      console.log(arr1.push("hihi"));
+
+      const arr = [1, 2, 5, 7, 9, 66, 88, 99];
+      // Lọc mảng ban đầu ra thành 2 mảng: mảng số chẵn, mảng số lẻ
+      // bằng push, pop, shift, unShift
+      const chan = [];
+      const le = [];
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] % 2 === 0) {
+          chan.push(arr[i]);
+        } else {
+          le.push(arr[i]);
+        }
+      }
+      console.log("Mảng chẵn là: ", chan);
+      console.log("Mảng lẻ là: ", le);
+
+      const arr2 = [
+        "Hoang",
+        "Quyen",
+        "",
+        null,
+        undefined,
+        "Dong",
+        NaN,
+        0,
+        10,
+        true,
+      ];
+      // Làm sạch các giá trị falsy ở mảng arr2
+      // và đưa vào mảng mới newArr2
+      const newArr2 = [];
+      for (let i = 0; i < arr2.length; i++) {
+        if (arr2[i]) {
+          newArr2.unshift(arr2[i]);
+        }
+      }
+      console.log("Mảng mới là", newArr2);
+
+      // Bài 3
+      const arr3 = ["apple", "orange", "banana", "kiwi"];
+      // Tìm và in ra trái cây có tên dài nhất
+      let maxLength = arr3[0];
+      let minLength = arr3[0];
+      for (let i = 1; i < arr3.length; i++) {
+        if (arr3[i].length > maxLength.length) {
+          maxLength = arr3[i];
+        }
+        if (arr3[i].length < minLength.length) {
+          minLength = arr3[i];
+        }
+      }
+      console.log("Trái cây có tên dài nhất là:", maxLength);
+      console.log("Trái cây có tên ngắn nhất là:", minLength);
+    </script>
+  </body>
+</html>
