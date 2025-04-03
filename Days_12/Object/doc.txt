@@ -1,0 +1,15 @@
+-----------------Object---------------------- 
+? Có ? cách tạo ra 1 Object
+
+- Object literal
+  + Cách 1:  const obj1 = {}
+
+- Dùng hàm khởi tạo có sẵn
+  + Cách 2:  const obj2 = new Object({name: "A"})
+  
+- Dùng factory function 
+function Motor(name, color, price){
+  return {
+    name, color, price
+  }
+}
