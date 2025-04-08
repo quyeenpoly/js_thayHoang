@@ -7,10 +7,10 @@
   </head>
   <body>
     <script>
-      let input = prompt("Nhập các số vào mảng, (Ví dụ: 1,2,3,4, 5,8 ,5,6,7)");
+      let input = prompt("Nhập các số");
       let arrayNumber;
       if (input === null || input.trim() === "") {
-        document.write("Cần nhập đúng dữ liệu");
+        document.write("Bạn chưa nhập số nào!");
       } else {
         arrayNumber = input.split(",").map(Number);
         document.write("Mảng của bạn: " + arrayNumber);

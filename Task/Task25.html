@@ -21,6 +21,9 @@
       function removeDuplicate(arr) {
         let result = [];
         for (let i = 0; i < arr.length; i++) {
+          /// Duyệt từng phần tử trong mảng
+          // Kiểm tra xem phần tử đã có trong mảng kết quả chưa
+          // Nếu chưa có thì thêm vào mảng kết quả
           let exist = false;
           for (let j = 0; j < arr.length; j++) {
             if (result[j] === arr[i]) {
@@ -37,7 +40,8 @@
 
       // Output:
       const result = removeDuplicate(fruits);
-
+      // console.log(fruits);
+      // console.log(result);
       console.log(result);
       document.write(`<h1>${removeDuplicate(fruits)}</h1>`);
     </script>
