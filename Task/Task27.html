@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>
+      Task 27: Viết hàm groupBy(arr, key) nhận vào một danh sách người dùng và
+      một key, trả về object nhóm người dùng theo đặc điểm key.
+    </h1>
+    <script>
+      const users = [
+        { fullname: "Nguyễn Quang Quyền", age: 20, address: "Thach That" },
+        { fullname: "Nguyễn Quang Quyết", age: 22, address: "Hà Tây" },
+        { fullname: "Nguyễn Minh Hoàng", age: 31, address: "Hoài Đức" },
+        { fullname: "Trịnh Xuân Văn", age: 22, address: "Hải Phòng" },
+        { fullname: "Nguyễn Văn Trọng", age: 32, address: "LangSon" },
+      ];
+
+      function groupBy(arr, key) {
+        return arr.reduce((acc, item) => {
+          // console.log(item, acc);
+          const groupKey = item[key];
+          if (!acc[groupKey]) {
+            acc[groupKey] = [];
+          }
+          acc[groupKey].push(item);
+          return acc;
+        }, {});
+      }
+      const testAge = groupBy(users, "age");
+      console.log(testAge);
+
+      const testAdress = groupBy(users, "address");
+      console.log(testAdress);
+    </script>
+  </body>
+</html>
