@@ -1,0 +1,64 @@
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài tập DOM: Hiển thị dữ liệu ra bảng bằng chuỗi</title>
+    <style>
+      /* CSS cơ bản để bảng dễ nhìn */
+      table {
+        border-collapse: collapse;
+        margin: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="dataTable"></table>
+    <script>
+      const students = [
+        { id: 1, name: "Nguyễn Quang Quyền", age: 20, city: "Hà Nội" },
+        { id: 2, name: "Nguyễn Quang Quyết", age: 19, city: "TP.HCM" },
+        { id: 3, name: "Thịnh Quốc Khánh", age: 21, city: "Đà Nẵng" },
+      ];
+
+      const table = document.getElementById("dataTable");
+
+      let html = `
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Tuổi</th>
+            <th>Thành phố</th>
+          </tr>
+        </thead>
+        <tbody>
+      `;
+
+      students.forEach((student) => {
+        html += `
+          <tr>
+            <td>${student.id}</td>
+            <td>${student.name}</td>
+            <td>${student.age}</td>
+            <td>${student.city}</td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody>`;
+
+      table.innerHTML = html;
+
+      // Thêm viền cho bảng qua JavaScript
+      table.style.border = "6px solid blue";
+      table.querySelectorAll("th, td").forEach((cell) => {
+        cell.style.border = "3px solid gray";
+      });
+    </script>
+  </body>
+</html>

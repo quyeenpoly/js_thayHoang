@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đồng Hồ Số</title>
+    <style>
+      #clock {
+        font-size: 3em;
+        font-family: "Courier New", monospace;
+        text-align: center;
+        margin-top: 100px;
+        padding: 30px;
+        background-color: #222;
+        color: #00ffcc;
+        border-radius: 15px;
+        width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock"></div>
+    <script>
+      const updateClock = () => {
+        const now = new Date();
+        let hours = now.getHours().toString().padStart(2, "0");
+        let minutes = now.getMinutes().toString().padStart(2, "0");
+        let seconds = now.getSeconds().toString().padStart(2, "0");
+        const currentTime = `${hours}:${minutes}:${seconds}`;
+
+        document.getElementById("clock").textContent = currentTime;
+      };
+
+      // Cập nhật đồng hồ mỗi giây
+      setInterval(updateClock, 1000);
+
+      // Gọi hàm lần đầu để hiển thị ngay lập tức khi tải trang
+      updateClock();
+    </script>
+  </body>
+</html>
