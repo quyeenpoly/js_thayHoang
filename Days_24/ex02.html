@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #grandparent {
+        width: 150px;
+        height: 150px;
+        background-color: lightblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #parent {
+        width: 100px;
+        height: 100px;
+        background-color: lightcoral;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #child {
+        background-color: lightgreen;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="grandparent">
+      <div id="parent">
+        <button id="child">Click me</button>
+      </div>
+    </div>
+
+    <script>
+      // 1.Sự kiện nổi bọt (event bubbling)
+      // 2.Event Capturing: sự kiện nổi bọt từ phần tử cha xuống phần tử con
+      const child = document.getElementById("child");
+      const parent = document.getElementById("parent");
+      const grandparent = document.getElementById("grandparent");
+
+      child.addEventListener(
+        "click",
+        function () {
+          console.log("Con");
+        }
+        //true // true: bắt đầu từ phần tử con, false: bắt đầu từ phần tử cha
+      );
+
+      parent.addEventListener("click", function () {
+        //event.stopPropagation(); // Ngăn chặn sự kiện nổi bọt lên phần tử cha
+        console.log("Bố");
+      });
+
+      grandparent.addEventListener("click", function () {
+        event.stopPropagation(); // Ngăn chặn sự kiện nổi bọt lên phần tử cha
+        console.log("Ông");
+      });
+    </script>
+  </body>
+</html>

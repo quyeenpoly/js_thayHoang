@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">Click me</button>
+    <script>
+      // Buổi trước
+      // có ? cách để gắn sự kiện
+      // 1. Gắn bằng attribute HTML
+      // 2. Dùng JS để gắn sự kiện
+      // 3. Dùng eventListener()
+      const btnElement = document.getElementById("btn");
+      btnElement.onclick = function () {
+        console.log(event);
+      };
+      // Một số thuộc tính quan trọng của event
+      // event.target: bản thân phần tử gắn sự kiện
+      // event.currentTarget: phần tử đang lắng nghe sự kiện
+      // event.stopPropagation(): dừng sự kiện nổi bọt
+      // event.preventDefault(): dừng hành vi mặc định của trình duyệt
+      // event.stopImmediatePropagation(): dừng tất cả các sự kiện nổi bọt
+    </script>
+  </body>
+</html>

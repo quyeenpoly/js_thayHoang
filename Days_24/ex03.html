@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="https://google.com" id="anchor">Google</a>
+    <script>
+      const aElement = document.getElementById("anchor");
+      aElement.addEventListener("click", function () {
+        event.preventDefault(); // Ngăn chặn hành vi mặc định của trình duyệt
+        console.log("Hello world !");
+      });
+    </script>
+  </body>
+</html>
