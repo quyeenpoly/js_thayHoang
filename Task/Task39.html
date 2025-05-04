@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xu li bat dong bo</title>
+  </head>
+  <body>
+    <script>
+      // Bai 1: Viết hàm getData1(callback) sử dụng callback để lấy dữ liệu sau 1 giây.
+      function getData1(callback) {
+        setTimeout(() => {
+          const data = [1, 2, 3, 4];
+          callback(data);
+        }, 1000);
+      }
+      // Sử dụng
+      getData1((data) => {
+        console.log(data);
+      });
+
+      // Bai 2: Viết hàm getData2() sử dụng Promise để lấy dữ liệu sau 1 giây.
+      function getData2() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const data = [1, 2, 3, 4];
+            resolve(data);
+          }, 1000);
+        });
+      }
+
+      // Sử dụng
+      getData2()
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+
+      // Bai 3: Viết hàm getData3() sử dụng async/await để lấy dữ liệu sau 1 giây.
+      function getData3() {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            const data = [1, 2, 3, 4];
+            resolve(data);
+          }, 1000);
+        });
+      }
+
+      // Sử dụng
+      async function fetchData() {
+        try {
+          const data = await getData3();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

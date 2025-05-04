@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xử lý bất đồng bộ với async - await</title>
+  </head>
+  <body>
+    <script>
+      async function callApi() {
+        const user = await getUser();
+        const posts = await getPosts(user.userId);
+        const comments = await getComments(posts[0]);
+        console.log(comments);
+      }
+    </script>
+  </body>
+</html>

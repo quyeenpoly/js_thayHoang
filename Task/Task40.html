@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xử lý Bất đồng bộ</title>
+  </head>
+  <body>
+    <h1>Xử lý Bất đồng bộ</h1>
+    <script>
+      // Common Functions
+      function getUser(userId, callback) {
+        setTimeout(() => {
+          callback({ id: userId, name: "John", age: 30 });
+        }, 1000);
+      }
+
+      function getPurchases(userId, callback) {
+        setTimeout(() => {
+          callback([
+            { id: 1, userId: userId, product: "Laptop", price: 1000 },
+            { id: 2, userId: userId, product: "Phone", price: 2000 },
+          ]);
+        }, 1000);
+      }
+
+      function getProductDetails(
+        productId,
+        productName,
+        productPrice,
+        callback
+      ) {
+        setTimeout(() => {
+          callback({ id: productId, name: productName, price: productPrice });
+        }, 1000);
+      }
+
+      // Promisify functions
+      function getUserPromise(userId) {
+        return new Promise((resolve) => {
+          getUser(userId, resolve);
+        });
+      }
+
+      function getPurchasesPromise(userId) {
+        return new Promise((resolve) => {
+          getPurchases(userId, resolve);
+        });
+      }
+
+      function getProductDetailsPromise(productId, productName, productPrice) {
+        return new Promise((resolve) => {
+          getProductDetails(productId, productName, productPrice, resolve);
+        });
+      }
+
+      // Bài 1: Callback
+      function runWithCallback() {
+        console.log(" Bài 1: Callback");
+        getUser(1, (user) => {
+          console.log("User:", user);
+          getPurchases(user.id, (purchases) => {
+            console.log("Purchases:", purchases);
+            let total = 0;
+            let count = 0;
+            purchases.forEach((purchase) => {
+              getProductDetails(
+                purchase.id,
+                purchase.product,
+                purchase.price,
+                (product) => {
+                  console.log("Product Detail:", product);
+                  total += product.price;
+                  count++;
+                  if (count === purchases.length) {
+                    console.log("Total price:", total);
+                  }
+                }
+              );
+            });
+          });
+        });
+      }
+
+      // Bài 2: Promise
+      function runWithPromise() {
+        console.log(" Bài 2: Promise ");
+        getUserPromise(1)
+          .then((user) => {
+            console.log("User:", user);
+            return getPurchasesPromise(user.id);
+          })
+          .then((purchases) => {
+            console.log("Purchases:", purchases);
+            const detailPromises = purchases.map((p) =>
+              getProductDetailsPromise(p.id, p.product, p.price)
+            );
+            return Promise.all(detailPromises);
+          })
+          .then((details) => {
+            console.log("Product Details:", details);
+            const total = details.reduce((sum, item) => sum + item.price, 0);
+            console.log("Total price:", total);
+          });
+      }
+
+      // Bài 3: Async/Await
+      async function runWithAsyncAwait() {
+        console.log(" Bài 3: Async/Await ");
+        const user = await getUserPromise(1);
+        console.log("User:", user);
+
+        const purchases = await getPurchasesPromise(user.id);
+        console.log("Purchases:", purchases);
+
+        const details = await Promise.all(
+          purchases.map((p) =>
+            getProductDetailsPromise(p.id, p.product, p.price)
+          )
+        );
+        console.log("Product Details:", details);
+
+        const total = details.reduce((sum, item) => sum + item.price, 0);
+        console.log("Total price:", total);
+      }
+
+      // Chạy thử
+      runWithCallback();
+      setTimeout(runWithPromise, 4000); // Chờ cho callback xong
+      setTimeout(runWithAsyncAwait, 8000); // Chờ cho promise xong
+    </script>
+  </body>
+</html>
