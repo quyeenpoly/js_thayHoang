@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học JSON</title>
+  </head>
+  <body>
+    <script>
+      //console.log(typeof JSON);
+      //console.log(JSON);
+
+      const arr1 = [
+        { id: 1, name: "Quyen" },
+        { id: 2, name: "Quyet" },
+      ];
+      const str1 = JSON.stringify(arr1);
+      console.log(str1); // JSON.stringify() chuyển đổi đối tượng JavaScript thành chuỗi JSON
+      const str2 = JSON.parse(str1);
+      console.log(str2); // JSON.parse() chuyển đổi chuỗi JSON thành đối tượng JavaScript
+
+      // JavaScript Object Notation (JSON)
+      const products = [
+        { id: 1, name: "Iphone", price: 1000 },
+        { id: 2, name: "Samsung", price: 2000 },
+      ];
+      // localStorage.setItem("products", products); // lỗi
+      localStorage.setItem("products", JSON.stringify(products)); // đúng
+
+      /* - Json không hỗ trợ các kiểu dữ liệu như function, undefined, symbol, BigInt
+         - Không lưu thuộc tính có value là undefined
+         - NaN khi được convert thành JSON sẽ thành null
+      */
+    </script>
+  </body>
+</html>

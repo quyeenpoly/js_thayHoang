@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storage</title>
+  </head>
+  <body>
+    <h1>Session storage & Local storage</h1>
+    <script>
+      console.log(sessionStorage);
+      console.log(localStorage);
+      // localstorage
+      /* - khoảng 5MB
+         - Không tự mất đuợc khi đóng trình duyệt
+         - Chỉ mất khi xóa thủ công hoặc xóa cache trình duyệt
+         - Được quản lý theo domain (và quản lý theo account nếu có nhiều tài khoản trên cùng 1 domain)
+         - dùng để lưu thông tin có tính duy trì lâu dài: thông tin đăng nhập, thông tin cá nhân,
+      */
+
+      // sessionstorage
+      /* - khoảng 5MB
+         - Tự mất khi đóng trình duyệt hoặc hết phiên làm việc
+         - Được quản lý theo tab
+         - dùng để lưu dữ liệu tạm thời cho 1 tab nào đó: các bước nhập form, 
+      */
+    </script>
+  </body>
+</html>

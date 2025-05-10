@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sinh viên</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container py-4">
+      <h1 class="text-center mb-4">Quản Lý Sinh Viên</h1>
+
+      <div id="error" class="alert alert-danger d-none" role="alert"></div>
+      <div id="success" class="alert alert-success d-none" role="alert"></div>
+
+      <div class="row g-3 mb-3">
+        <div class="col-md-3">
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Họ tên"
+          />
+        </div>
+        <div class="col-md-2">
+          <input
+            type="number"
+            id="math"
+            class="form-control"
+            placeholder="Toán"
+          />
+        </div>
+        <div class="col-md-2">
+          <input
+            type="number"
+            id="english"
+            class="form-control"
+            placeholder="Anh"
+          />
+        </div>
+        <div class="col-md-2">
+          <input
+            type="number"
+            id="science"
+            class="form-control"
+            placeholder="Khoa học"
+          />
+        </div>
+        <div class="col-md-3">
+          <button id="addStudent" class="btn btn-primary w-50">Thêm</button>
+          <button id="huy-btn" class="btn btn-secondary w-40 ms-1 d-none">
+            Hủy
+          </button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <input
+            type="text"
+            id="search"
+            oninput="searchStudents()"
+            class="form-control"
+            placeholder="Tìm theo tên"
+          />
+        </div>
+        <div class="col-md-4">
+          <select id="filter" onchange="filterStudents()" class="form-select">
+            <option value="">Lọc theo học lực</option>
+            <option value="Giỏi">Giỏi</option>
+            <option value="Khá">Khá</option>
+            <option value="TB">Trung bình</option>
+            <option value="Yếu">Yếu</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <select id="sort" onchange="sortStudents()" class="form-select">
+            <option value="">Sắp xếp theo điểm TB</option>
+            <option value="avg-desc">Cao đến thấp</option>
+            <option value="avg-asc">Thấp đến cao</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table
+          class="table table-bordered table-hover"
+          id="tableStudent"
+        ></table>
+      </div>
+    </div>
+
+    <script>
+      const studentTable = document.getElementById("tableStudent");
+      const actionBTN = document.getElementById("addStudent");
+      const errortext = document.getElementById("error");
+      const successText = document.getElementById("success");
+      const hoTen = document.getElementById("name");
+      const math = document.getElementById("math");
+      const english = document.getElementById("english");
+      const science = document.getElementById("science");
+      let editingStudentId = null;
+      let dataStudents = JSON.parse(localStorage.getItem("student") || "[]");
+
+      function diemTB(a, b, c) {
+        return ((+a + +b + +c) / 3).toFixed(2);
+      }
+
+      function hocLuc(rank) {
+        if (rank >= 8) return "Giỏi";
+        else if (rank >= 6.5) return "Khá";
+        else if (rank >= 5) return "TB";
+        else return "Yếu";
+      }
+
+      function generateId(length) {
+        const listCharaters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let newId = "";
+        for (let i = 0; i < length; i++) {
+          numberRD = Math.floor(Math.random() * listCharaters.length);
+          newId += listCharaters[numberRD];
+        }
+        return newId;
+      }
+
+      function add() {
+        if (
+          hoTen.value.trim() == "" ||
+          math.value == "" ||
+          english.value == "" ||
+          science.value == ""
+        ) {
+          errortext.innerText = "Không Được để Trống !";
+          errortext.classList.remove("d-none");
+          return;
+        }
+        if (
+          math.value > 10 ||
+          math.value < 0 ||
+          english.value > 10 ||
+          english.value < 0 ||
+          science.value > 10 ||
+          science.value < 0
+        ) {
+          errortext.innerText = "Nhập điểm không hợp lệ !";
+          errortext.classList.remove("d-none");
+          return;
+        }
+        errortext.classList.add("d-none");
+        let avg = diemTB(math.value, english.value, science.value);
+        if (editingStudentId !== null) {
+          const student = dataStudents.find((s) => s.id === editingStudentId);
+          student.math = math.value;
+          student.english = english.value;
+          student.science = science.value;
+          student.avg = avg;
+          student.hLuc = hocLuc(avg);
+          successText.innerText = "Đã Sửa thành công !";
+        } else {
+          let student = {
+            id: generateId(4),
+            name: hoTen.value,
+            math: math.value,
+            english: english.value,
+            science: science.value,
+            avg: avg,
+            hLuc: hocLuc(avg),
+          };
+          dataStudents.push(student);
+          successText.innerText = "Đã thêm thành công !";
+        }
+        successText.classList.remove("d-none");
+        Mess();
+        localStorage.setItem("student", JSON.stringify(dataStudents));
+        reset();
+        renderTable(dataStudents);
+      }
+
+      function deleteST(id) {
+        const i = confirm("Bạn Chắc chắn xóa Chưa !");
+        if (i) {
+          dataStudents = dataStudents.filter((hs) => hs.id != id);
+          successText.innerText = "Đã xóa thành công !";
+          successText.classList.remove("d-none");
+          Mess();
+          localStorage.setItem("student", JSON.stringify(dataStudents));
+          renderTable(dataStudents);
+        }
+      }
+
+      function update(id) {
+        const student = dataStudents.find((s) => s.id == id);
+        editingStudentId = id;
+        hoTen.value = student.name;
+        hoTen.setAttribute("readonly", "readonly");
+        math.value = student.math;
+        english.value = student.english;
+        science.value = student.science;
+        actionBTN.textContent = "Lưu";
+        document.getElementById("huy-btn").classList.remove("d-none");
+        document.getElementById("huy-btn").addEventListener("click", reset);
+      }
+
+      function searchStudents() {
+        const search = document.getElementById("search").value.toLowerCase();
+        const filterStudents = dataStudents.filter((student) =>
+          student.name.toLowerCase().includes(search.trim())
+        );
+        renderTable(search === "" ? dataStudents : filterStudents);
+      }
+
+      function filterStudents() {
+        const filterOption = document.getElementById("filter").value;
+        if (!filterOption) return renderTable(dataStudents);
+        const filterStudents = dataStudents.filter(
+          (s) => s.hLuc === filterOption
+        );
+        renderTable(filterStudents);
+      }
+
+      function sortStudents() {
+        const sortOption = document.getElementById("sort").value;
+        let sortStudents = [...dataStudents];
+        if (sortOption === "avg-desc") {
+          sortStudents.sort((a, b) => b.avg - a.avg);
+        } else if (sortOption === "avg-asc") {
+          sortStudents.sort((a, b) => a.avg - b.avg);
+        }
+        renderTable(sortStudents);
+      }
+
+      function renderTable(data) {
+        if (!Array.isArray(data)) {
+          errortext.innerText = "Dữ liệu không hợp lệ !";
+          errortext.classList.remove("d-none");
+          return;
+        }
+        studentTable.innerHTML = `<thead class="table-primary">
+        <tr>
+          <th>Id</th>
+          <th>Họ Tên</th>
+          <th>Toán</th>
+          <th>Anh</th>
+          <th>Khoa học</th>
+          <th>TB</th>
+          <th>Học lực</th>
+          <th>Hành động</th>
+        </tr></thead><tbody></tbody>`;
+        const tbody = studentTable.querySelector("tbody");
+        data.forEach((student) => {
+          let tr = document.createElement("tr");
+          tr.innerHTML = `
+          <td style="font-size:12px">${student.id}</td>
+          <td>${student.name}</td>
+          <td>${student.math}</td>
+          <td>${student.english}</td>
+          <td>${student.science}</td>
+          <td>${student.avg}</td>
+          <td>${student.hLuc}</td>
+          <td>
+            <button class="btn btn-sm btn-warning me-1" onclick="update('${student.id}')">Cập nhật</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteST('${student.id}')">Xóa</button>
+          </td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function reset() {
+        hoTen.value = "";
+        math.value = "";
+        english.value = "";
+        science.value = "";
+        actionBTN.textContent = "Thêm";
+        document.getElementById("huy-btn").classList.add("d-none");
+        hoTen.removeAttribute("readonly");
+        editingStudentId = null;
+        renderTable(dataStudents);
+      }
+
+      function Mess() {
+        setTimeout(() => {
+          successText.classList.add("d-none");
+        }, 3000);
+      }
+
+      actionBTN.addEventListener("click", add);
+      renderTable(dataStudents);
+    </script>
+  </body>
+</html>
