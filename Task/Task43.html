@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Fetch API</title>
+    <style>
+      body {
+        margin: 20px;
+      }
+      #products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .product {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .product img {
+        max-width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .controls {
+        margin-bottom: 20px;
+      }
+      .pagination {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Danh sách sản phẩm</h1>
+
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="Tìm sản phẩm..." />
+      <button onclick="handleSearch()">Tìm kiếm</button>
+
+      <select id="sortSelect" onchange="handleSort()">
+        <option value="">-- Sắp xếp theo giá --</option>
+        <option value="asc">Tăng dần</option>
+        <option value="desc">Giảm dần</option>
+      </select>
+    </div>
+
+    <p id="count"></p>
+    <div id="products"></div>
+
+    <div class="pagination">
+      <button onclick="prevPage()">Trang trước</button>
+      <span id="pageInfo"></span>
+      <button onclick="nextPage()">Trang sau</button>
+    </div>
+
+    <script>
+      let products = [];
+      let currentPage = 1;
+      const pageSize = 8;
+
+      async function fetchProducts(url = "https://dummyjson.com/products") {
+        const res = await fetch(url);
+        const data = await res.json();
+        products = data.products || data;
+        currentPage = 1;
+        renderProducts();
+      }
+
+      function renderProducts() {
+        const start = (currentPage - 1) * pageSize;
+        const end = start + pageSize;
+        const visibleProducts = products.slice(start, end);
+
+        document.getElementById("products").innerHTML = visibleProducts
+          .map(
+            (p) => `
+        <div class="product">
+          <img src="${p.thumbnail}" alt="${p.title}" />
+          <h3>${p.title}</h3>
+          <p>${p.description.slice(0, 50)}...</p>
+          <p><strong>Giá:</strong> $${p.price}</p>
+          <p><strong>Danh mục:</strong> ${p.category}</p>
+          <button onclick="viewDetail(${p.id})">Xem chi tiết</button>
+        </div>
+      `
+          )
+          .join("");
+
+        document.getElementById("count");
+        document.getElementById(
+          "pageInfo"
+        ).textContent = `Trang ${currentPage} / ${Math.ceil(
+          products.length / pageSize
+        )}`;
+      }
+
+      function handleSearch() {
+        const query = document.getElementById("searchInput").value;
+        if (!query) return fetchProducts();
+        fetchProducts(
+          `https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`
+        );
+      }
+
+      function viewDetail(id) {
+        fetch(`https://dummyjson.com/products/${id}`)
+          .then((res) => res.json())
+          .then((product) => {
+            alert(
+              `Tên: ${product.title}\nGiá: $${product.price}\nMô tả: ${product.description}`
+            );
+          });
+      }
+
+      function handleSort() {
+        const sortType = document.getElementById("sortSelect").value;
+        if (sortType === "asc") {
+          products.sort((a, b) => a.price - b.price);
+        } else if (sortType === "desc") {
+          products.sort((a, b) => b.price - a.price);
+        }
+        currentPage = 1;
+        renderProducts();
+      }
+
+      function nextPage() {
+        const maxPage = Math.ceil(products.length / pageSize);
+        if (currentPage < maxPage) {
+          currentPage++;
+          renderProducts();
+        }
+      }
+
+      function prevPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          renderProducts();
+        }
+      }
+
+      // Load initial products
+      fetchProducts();
+    </script>
+  </body>
+</html>
